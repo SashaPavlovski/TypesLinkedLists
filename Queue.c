@@ -18,12 +18,16 @@ struct Item* tail = NULL;
 struct Item* old;
 int id_counter = 0;
 
-void removeitemfromtail()
+struct Item* removeitemfromtail()
 {
 	struct Item* move = head;
-	head = head->next;
 
-	free(move);
+	if (head->next != NULL) {
+	    head = head->next;
+		head->prev = NULL;
+	}
+
+	return move;
 }
 
 void PrintList()
@@ -68,7 +72,7 @@ void AddItemToHead(int val, int val2)
 	old = move;
 
 	PrintList();
-	removeitemfromtail();
+	free(removeitemfromtail());
 }
 
 
